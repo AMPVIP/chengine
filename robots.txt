@@ -1,1 +1,1 @@
-Sitemap: https://github.com/AMPVIP/chengine/sitemap.xml
+Sitemap: https://ampvip.github.io/chengine//sitemap.xml
