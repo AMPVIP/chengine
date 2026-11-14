@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Китайские мотоциклетные двигатели — справочник характеристик (Zongshen, Lifan, Loncin)</title>
+<meta name="description" content="Полный справочник по китайским мотоциклетным двигателям: маркировка, объём, мощность, тип охлаждения и репутация моторов Zongshen, Lifan, Loncin, Yinxiang, GY6, CFMoto, QJMOTOR, Haojue.">
+<meta name="keywords" content="китайские двигатели, мотоцикл, Zongshen, Lifan, Loncin, Yinxiang, GY6, NC250, NC450, CB250, KEL525, характеристики, маркировка">
+<link rel="canonical" href="https://github.com/AMPVIP/chengine">
+<!-- Open Graph для соцсетей -->
+<meta property="og:title" content="Китайские мотоциклетные двигатели — справочник">
+<meta property="og:description" content="Характеристики и репутация моторов Zongshen, Lifan, Loncin, Yinxiang и GY6.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://github.com/AMPVIP/chengine">
+<style>
+  :root {
+    --bg: #0f1419;
+    --card: #1a2129;
+    --card-hover: #222b35;
+    --border: #2d3742;
+    --text: #e6edf3;
+    --text-dim: #8b98a5;
+    --accent: #f0883e;
+    --air: #3fb950;
+    --liquid: #58a6ff;
+    --zongshen: #f85149;
+    --loncin: #d29922;
+    --lifan: #a371f7;
+    --yinxiang: #3fb950;
+    --gy6: #8b98a5;
+    --other: #58a6ff;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+    padding: 20px;
+  }
+  .container { max-width: 1500px; margin: 0 auto; }
+  header {
+    text-align: center;
+    padding: 30px 0 20px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 24px;
+  }
+  header h1 {
+    font-size: clamp(1.5rem, 4vw, 2.2rem);
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--accent), #f0c040);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  header p {
+    color: var(--text-dim);
+    margin-top: 8px;
+    font-size: 0.95rem;
+  }
+  .controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 20px;
+    align-items: center;
+  }
+  .controls input, .controls select {
+    background: var(--card);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .controls input:focus, .controls select:focus {
+    border-color: var(--accent);
+  }
+  .controls input { flex: 1; min-width: 200px; }
+  .controls select { cursor: pointer; min-width: 150px; }
+  .stats {
+    color: var(--text-dim);
+    font-size: 0.85rem;
+    margin-bottom: 12px;
+  }
+  .stats span { color: var(--accent); font-weight: 600; }
+  .table-wrap {
+    overflow-x: auto;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: var(--card);
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+    min-width: 1200px;
+  }
+  thead {
+    background: #141a20;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+  }
+  th {
+    padding: 12px 10px;
+    text-align: left;
+    font-weight: 600;
+    color: var(--text-dim);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+  }
+  th.sortable {
+    cursor: pointer;
+    user-select: none;
+    transition: color 0.15s;
+  }
+  th.sortable:hover { color: var(--accent); }
+  th.sortable.active { color: var(--accent); }
+  th.sortable .arrow { font-size: 0.65rem; opacity: 0.6; margin-left: 4px; }
+  th.sortable.active .arrow { opacity: 1; }
+  td {
+    padding: 11px 10px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  tbody tr { transition: background 0.15s; }
+  tbody tr:hover { background: var(--card-hover); }
+  tbody tr:last-child td { border-bottom: none; }
+  .model {
+    font-weight: 700;
+    color: var(--text);
+    white-space: nowrap;
+  }
+  .model small {
+    display: block;
+    font-weight: 400;
+    color: var(--text-dim);
+    font-size: 0.75rem;
+    margin-top: 2px;
+  }
+  .badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .badge-air { background: rgba(63,185,80,0.15); color: var(--air); }
+  .badge-liquid { background: rgba(88,166,255,0.15); color: var(--liquid); }
+  .badge-zongshen { background: rgba(248,81,73,0.15); color: var(--zongshen); }
+  .badge-loncin { background: rgba(210,153,34,0.15); color: var(--loncin); }
+  .badge-lifan { background: rgba(163,113,247,0.15); color: var(--lifan); }
+  .badge-yinxiang { background: rgba(63,185,80,0.15); color: var(--yinxiang); }
+  .badge-gy6 { background: rgba(139,152,165,0.15); color: var(--gy6); }
+  .badge-other { background: rgba(88,166,255,0.15); color: var(--other); }
+  .notes {
+    color: var(--text-dim);
+    font-size: 0.8rem;
+    max-width: 340px;
+  }
+  .models-list {
+    color: var(--text-dim);
+    font-size: 0.8rem;
+    max-width: 220px;
+  }
+  .no-results {
+    text-align: center;
+    padding: 40px;
+    color: var(--text-dim);
+    display: none;
+  }
+  footer {
+    text-align: center;
+    padding: 30px 0 10px;
+    color: var(--text-dim);
+    font-size: 0.8rem;
+    border-top: 1px solid var(--border);
+    margin-top: 24px;
+  }
+  footer a { color: var(--accent); text-decoration: none; }
+  @media (max-width: 600px) {
+    body { padding: 12px; }
+    .controls { flex-direction: column; }
+    .controls input, .controls select { width: 100%; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>Китайские мотоциклетные двигатели</h1>
+    <p>Справочник по маркировке, характеристикам и репутации моторов Zongshen, Lifan, Loncin, Yinxiang и GY6</p>
+  </header>
+
+  <div class="controls">
+    <input type="text" id="search" placeholder="🔍 Поиск по модели или производителю...">
+    <select id="filter-maker">
+      <option value="">Все производители</option>
+      <option value="Zongshen">Zongshen</option>
+      <option value="Lifan">Lifan</option>
+      <option value="Loncin">Loncin</option>
+      <option value="Yinxiang">Yinxiang</option>
+      <option value="GY6">GY6 / Различные</option>
+      <option value="CFMoto">CFMoto</option>
+      <option value="QJMOTOR">QJMOTOR</option>
+      <option value="Haojue">Haojue</option>
+    </select>
+    <select id="filter-cooling">
+      <option value="">Любое охлаждение</option>
+      <option value="air">Воздушное</option>
+      <option value="liquid">Жидкостное</option>
+    </select>
+    <select id="filter-volume">
+      <option value="">Любой объём</option>
+      <option value="0-125">до 125 см³</option>
+      <option value="126-250">126–250 см³</option>
+      <option value="251-450">251–450 см³</option>
+      <option value="451-9999">451+ см³</option>
+    </select>
+  </div>
+
+  <div class="stats" id="stats"></div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th class="sortable" data-sort="model">Модель <span class="arrow">↕</span></th>
+          <th>Производитель</th>
+          <th>Тип</th>
+          <th>Диам.</th>
+          <th>Охлаждение</th>
+          <th class="sortable" data-sort="volume">Объём <span class="arrow">↕</span></th>
+          <th class="sortable" data-sort="power">Мощность <span class="arrow">↕</span></th>
+          <th>Особенности и репутация</th>
+          <th>Типичные модели</th>
+        </tr>
+      </thead>
+      <tbody id="tbody">
+  <tr data-maker="GY6" data-cool="air" data-volume="49.6" data-power="3.5">
+    <td class="model">139QMB<small>139QMA</small></td>
+    <td><span class="badge badge-gy6">Различные (GY6)</span></td>
+    <td>1 цил., наклонный</td>
+    <td>39 мм</td>
+    <td><span class="badge badge-air">Воздушное</span></td>
+    <td>49,6 см³</td>
+    <td>~3–4 л.с.</td>
+    <td class="notes">«Народный» 4-тактный скутерный мотор. Массовый, простой, дешёвый. Огромный выбор запчастей. Надёжность зависит от производителя: у брендовых скутеров ходит долго, у «ноунеймов» — как повезёт. Требует регулярной замены масла и регулировки клапанов.</td>
+    <td class="models-list">Китайские скутеры 50cc (Honda Dio/Lead клоны), мини-квадроциклы</td>
+  </tr>
+  <tr data-maker="GY6" data-cool="air" data-volume="124.6" data-power="10">
+    <td class="model">152QMI<small>GY6 125</small></td>
+    <td><span class="badge badge-gy6">Различные (GY6)</span></td>
+    <td>1 цил., наклонный</td>
+    <td>52,4 мм</td>
+    <td><span class="badge badge-air">Воздушное</span></td>
+    <td>124,6 см³</td>
+    <td>~7,8–12,4 л.с.</td>
+    <td class="notes">Рабочая лошадка китайского скутеростроения. Дальнейшее развитие 139QMB. Прост, ремонтопригоден, запчасти копеечные. Ресурс при нормальном уходе — 30–50 тыс. км. Слабое место — качество сборки и электрика у дешёвых моделей.</td>
+    <td class="models-list">Скутеры 125cc, трициклы, лёгкие квадроциклы</td>
+  </tr>
+  <tr data-maker="Yinxiang" data-cool="air" data-volume="140" data-power="11">
+    <td class="model">1P56FMJ<small>YX140</small></td>
+    <td><span class="badge badge-yinxiang">Yinxiang / YX</span></td>
+    <td>1 цил., горизонтальный, OHC, 2 клапана</td>
+    <td>56 мм</td>
+    <td><span class="badge badge-air">Воздушно-масляное</span></td>
+    <td>140 см³</td>
+    <td>~9,2–11,2 л.с.</td>
+    <td class="notes">Самый массовый питбайковый мотор. Горизонтальный цилиндр, 2 клапана, 4-ступенчатая КПП (N-1-2-3-4). Версии отличаются степенью сжатия: 9,8:1 даёт 8,2 кВт (11,2 л.с.) при 8000 об/мин и 10,2 Нм при 7500; версия 8,8:1 — 6,8 кВт (9,2 л.с.) при 7500 и 9,7 Нм при 5500. Кикстартер или электростартер+кикстартер в зависимости от комплектации.</td>
+    <td class="models-list">Kayo YX140EM/Classic/Basic TT140, BSE, Zuumav, YCF, Apollo, Motoland, Regulmoto, Honda Dax/Grom/Monkey (горизонтальная установка)</td>
+  </tr>
+  <tr data-maker="Zongshen" data-cool="air" data-volume="124.1" data-power="11.2">
+    <td class="model">156FMI<small>CG125</small></td>
+    <td><span class="badge badge-zongshen">Zongshen / Различные</span></td>
+    <td>1 цил., вертикальный (OHV)</td>
+    <td>56,5 мм</td>
+    <td><span class="badge badge-air">Воздушное</span></td>
+    <td>124,1 см³</td>
+    <td>10,9–11,5 л.с.</td>
+    <td class="notes">Классический CG125. Простой нижневальный мотор, копия Honda CG125. Огромный ресурс, ремонтопригодность, запчасти копеечные. Рабочая лошадка бюджетных дорожников и эндуро.</td>
+    <td class="models-list">Бюджетные дорожники 125cc, эндуро</td>
+  </tr>
+  <tr data-maker="Zongshen" data-cool="air" data-volume="124.1" data-power="11.2">
+    <td class="model">157FMI<small>CB125</small></td>
+    <td><span class="badge badge-zongshen">Zongshen / Различные</span></td>
+    <td>1 цил., вертикальный (OHC)</td>
+    <td>56,5 мм</td>
+    <td><span class="badge badge-air">Воздушное</span></td>
+    <td>124,1 см³</td>
+    <td>10,9–11,5 л.с.</td>
+    <td class="notes">Верхневальный CB125. Крутится выше CG125 (9500–10000 об/мин), но требует более частой регулировки клапанов. Встречается на дорожниках и лёгких эндуро.</td>
+    <td class="models-list">Дорожники 125cc</td>
+  </tr>
+  <tr data-maker="GY6" data-cool="air" data-volume="148.5" data-power="10">
+    <td class="model">157QMJ<small>GY6 150</small></td>
+    <td><span class="badge badge-gy6">Различные (GY6)</span></td>
+    <td>1 цил., наклонный</td>
+    <td>57,2 мм</td>
+    <td><span class="badge badge-air">Воздушное</span></td>
+    <td>148,5 см³</td>
+    <td>~7,8–12,4 л.с.</td>
+    <td class="notes">То же, что 152QMI, но больше объём. Рабочая лошадка скутеростроения.</td>
+    <td class="models-list">Скутеры 150cc, трициклы, лёгкие квадроциклы</td>
+  </tr>
+    <tr data-maker="Yinxiang" data-cool="air" data-volume="150" data-power="13.9">
+    <td class="model">1P60FMJ<small>YX150E / WD150</small></td>
+    <td><span class="badge badge-yinxiang">Yinxiang / YX</span></td>
+    <td>1 цил., горизонтальный, 2 клапана</td>
+    <td>60 мм</td>
+    <td><span class="badge badge-air">Воздушно-масляное</span></td>
+    <td>150 см³</td>
+    <td>10,2 кВт (≈13,9 л.с.)</td>
+    <td class="notes">Горизонтальный питбайковый мотор, дефорсированная версия YX160 (ход 53 мм против 57). Степень сжатия 9,9:1, момент 11,2 Нм при 8000 об/мин. 4-ступенчатая КПП (N-1-2-3-4), генератор на 6 катушек. Продавцы питбайков иногда заявляют 15–16 л.с. — это маркетинговое округление или результат стендовых замеров. Карбюратор MIKUNI VM26.</td>
+    <td class="models-list">Kayo Evolution YX150EM, Fidelis Furious 150, BSE PH150, PROGASI Jumbo 150, Moretti 1P60FMJ</td>
+  </tr>
+    <tr data-maker="Yinxiang" data-cool="air" data-volume="161.08" data-power="13.9">
+    <td class="model">1P60FMK<small>YX160-2 / W160-2</small></td>
+    <td><span class="badge badge-yinxiang">Yinxiang / YX</span></td>
+    <td>1 цил., горизонтальный, 2 клапана</td>
+    <td>60 мм</td>
+    <td><span class="badge badge-air">Воздушно-масляное</span></td>
+    <td>161,08 см³</td>
+    <td>10,2 кВт (≈13,9 л.с.)</td>
+    <td class="notes">Горизонтальный питбайковый мотор, старший брат YX150 (ход 57 мм против 53). Степень сжатия 9,9:1, момент 11,2 Нм при 8000 об/мин. 4-ступенчатая КПП (N-1-2-3-4), 5-дисковое мокрое сцепление, кикстартер. Обязательно использование масляного радиатора. Продавцы питбайков (JazzMoto, Kayo) заявляют 16–17 л.с. — это маркетинговое округление или стендовые замеры. Карбюраторы: VM26, PE26, PE24.</td>
+    <td class="models-list">Kayo GP1-SM YX160, K2R SX/PF 160, Progasi SMART 160, BSE, YCF, Apollo</td>
+  </tr>
+  <tr data-maker="Zongshen" data-cool="air" data-volume="144.6" data-power="12">
+    <td class="model">161FMJ<small>CB150</small></td>
+    <td><span class="badge badge-zongshen">Zongshen</span></td>
+    <td>1 цил., вертикальный (OHC)</td>
+    <td>61 мм</td>
+    <td><span class="badge badge-air">Воздушное</span></td>
+    <td>144,6 см³</td>
+    <td>12 л.с.</td>
+    <td class="notes">Бюджетный верхневальный мотор для лёгких эндуро и дорожников. Простой, неприхотливый, с электростартером и кикстартером. Встречается на BSE Z1, Kayo K1-J, Iride Вездеход.</td>
+    <td class="models-list">BSE Z1, Kayo K1-J 150, Iride Вездеход 150</td>
+  </tr>
+  <tr data-maker="Zongshen" data-cool="air" data-volume="149" data-power="12.5">
+    <td class="model">162FMJ<small>CG150</small></td>
+    <td><span class="badge badge-zongshen">Zongshen / Различные</span></td>
+    <td>1 цил., вертикальный (OHC)</td>
+    <td>62 мм</td>
+    <td><span class="badge badge-air">Воздушное</span></td>
+    <td>149 см³</td>
+    <td>12 л.с.</td>
+    <td class="notes">Близкий родственник 161FMJ, отличается диаметром поршня (62 мм против 61 мм) и коробкой передач. Встречается в версии 196 см³ (14 л.с.). Распространён на бюджетных эндуро и дорожниках.</td>
+    <td class="models-list">Spark SP 150R, Racer RC-150 GY, различные 150cc эндуро</td>
+  </tr>
+  <tr data-maker="Lifan" data-cool="air" data-volume="200" data-power="14">
+    <td class="model">163FML<small>CG200</small></td>
+    <td><span class="badge badge-lifan">Lifan</span></td>
+    <td>1 цил., вертикальный (OHV)</td>
+    <td>63 мм</td>
+    <td><span class="badge badge-air">Воздушное</span></td>
+    <td>193,2 см³</td>
+    <td>~13,5–15 л.с.</td>
+    <td class="notes">Мощный «воздушник» для эндуро. Копия Honda CG200. Хорошая тяга на низах, прост в ремонте. Слабое место — вибрации и качество сборки у дешёвых моделей.</td>
+    <td class="models-list">Lifan LF200GY, китайские эндуро 200cc</td>
+  </tr>
+  <tr data-maker="Zongshen" data-cool="air" data-volume="196.8" data-power="14.6">
+    <td class="model">164FML<small>CB200</small></td>
+    <td><span class="badge badge-zongshen">Zongshen / Различные</span></td>
+    <td>1 цил., вертикальный (OHC)</td>
+    <td>63,5 мм</td>
+    <td><span class="badge badge-air">Воздушное</span></td>
+    <td>196,8 см³</td>
+    <td>14,2–15,0 л.с.</td>
+    <td class="notes">Верхневальный CB200. Близок к 163FML (CG200), но с OHC вместо OHV — крутится выше, тянет с более высоких оборотов. Встречается на лёгких эндуро и дорожниках.</td>
+    <td class="models-list">Лёгкие эндуро 200cc</td>
+  </tr>
+  <tr data-maker="Zongshen" data-cool="air" data-volume="223" data-power="16.3">
+    <td class="model">165FMM<small>CB250D-G</small></td>
+    <td><span class="badge badge-zongshen">Zongshen</span></td>
+    <td>1 цил., вертикальный (OHC)</td>
+    <td>65,5 мм</td>
+    <td><span class="badge badge-air">Воздушное</span></td>
+    <td>223 см³</td>
+    <td>16,3 л.с.</td>
+    <td class="notes">Воздушный OHC-мотор, близкий к CB250. Встречается на бюджетных эндуро и дорожниках (TMBK Fahrenheit, Spark). Крутящий момент 17,5 Нм при 5500 об/мин.</td>
+    <td class="models-list">TMBK Fahrenheit, Spark 250</td>
+  </tr>
+  <tr data-maker="Zongshen" data-cool="air" data-volume="233" data-power="16.5">
+    <td class="model">166FMM<small>CB250</small></td>
+    <td><span class="badge badge-zongshen">Zongshen / Lifan</span></td>
+    <td>1 цил., вертикальный (OHC)</td>
+    <td>66 мм</td>
+    <td><span class="badge badge-air">Воздушное</span></td>
+    <td>233 см³</td>
+    <td>17 л.с.</td>
+    <td class="notes">Копия Honda CB/CBF250. Простой и выносливый «воздушник». Не требует частого обслуживания, тянет с низов.</td>
+    <td class="models-list">Zongshen RX1, бюджетные эндуро</td>
+  </tr>
+  <tr data-maker="Zongshen" data-cool="air" data-volume="223" data-power="16">
+    <td class="model">167FMM<small>CG250</small></td>
+    <td><span class="badge badge-zongshen">Zongshen и др.</span></td>
+    <td>1 цил., вертикальный (OHV)</td>
+    <td>67 мм</td>
+    <td><span class="badge badge-air">Воздушное</span></td>
+    <td>~223 см³</td>
+    <td>16 л.с.</td>
+    <td class="notes">Классический CG250. Простой, тяговитый, ремонтопригодный.</td>
+    <td class="models-list">Бюджетные эндуро, дорожники</td>
+  </tr>
+  <tr data-maker="Zongshen" data-cool="air" data-volume="249" data-power="16.5">
+    <td class="model">169FMM<small>CB250</small></td>
+    <td><span class="badge badge-zongshen">Zongshen / Lifan</span></td>
+    <td>1 цил., вертикальный (OHC)</td>
+    <td>69 мм</td>
+    <td><span class="badge badge-air">Воздушное</span></td>
+    <td>232,6 см³</td>
+    <td>16–17 л.с.</td>
+    <td class="notes">То же семейство CB250, но больше диаметр поршня.</td>
+    <td class="models-list">Zongshen RX1, бюджетные эндуро</td>
+  </tr>
+    <tr data-maker="Zongshen" data-cool="liquid" data-volume="250" data-power="18">
+    <td class="model">169MM<small>CB250-A</small></td>
+    <td><span class="badge badge-zongshen">Zongshen</span></td>
+    <td>1 цил., вертикальный, 2 клапана</td>
+    <td>69 мм</td>
+    <td><span class="badge badge-liquid">Жидкостное</span></td>
+    <td>250 см³</td>
+    <td>~15–23 л.с.</td>
+    <td class="notes">Жидкостная версия семейства 169 (CB250-A). Двухклапанный мотор, изначально разработанный для квадроциклов — водяное охлаждение нужно для предотвращения перегрева на низких скоростях. Мощность в источниках сильно разнится: от 15–16 л.с. (форумные данные) до 18 л.с. (магазины) и 23 л.с. (карточки квадроциклов). Диаметр × ход 69 × 65 мм. Встречается на квадроциклах Mikilon Rapide 250S и эндуро.</td>
+    <td class="models-list">Mikilon Rapide 250S, эндуро 250cc</td>
+  </tr>
+    <tr data-maker="Zongshen" data-cool="air" data-volume="270" data-power="15.6">
+    <td class="model">170FMN<small>CG270</small></td>
+    <td><span class="badge badge-zongshen">Zongshen / Различные</span></td>
+    <td>1 цил., вертикальный (OHC)</td>
+    <td>70 мм</td>
+    <td><span class="badge badge-air">Воздушное</span></td>
+    <td>~250–300 см³</td>
+    <td>15,6–24 л.с.</td>
+    <td class="notes">Маркировка 170FMN встречается в разных версиях: 270 см³ / 15,6 л.с. (диаметр × ход 70 × 70,2), 250 см³ / 21 л.с. (Motoland XV250-B), 300 см³ / 24 л.с. (YX170FMN, с балансирным валом). Уточняйте объём по конкретной модели мотоцикла.</td>
+    <td class="models-list">Motoland Crf St Enduro XV250-B, SPORT-007 300cc, VMC Enduro (170FMN/170FMM)</td>
+  </tr>
+  <tr data-maker="Zongshen" data-cool="liquid" data-volume="249" data-power="24.5">
+    <td class="model">170MM-2<small>CB250</small></td>
+    <td><span class="badge badge-zongshen">Zongshen</span></td>
+    <td>1 цил., вертикальный</td>
+    <td>70 мм</td>
+    <td><span class="badge badge-liquid">Жидкостное</span></td>
+    <td>249 см³</td>
+    <td>24–25 л.с.</td>
+    <td class="notes">Жидкостное охлаждение (радиатор). Не путать с воздушными версиями CB250 — несмотря на отсутствие буквы Q в коде, охлаждение водяное.</td>
+    <td class="models-list">—</td>
+  </tr>
+  <tr data-maker="Loncin" data-cool="air" data-volume="249.4" data-power="24.5">
+    <td class="model">171YMM<small>FE250</small></td>
+    <td><span class="badge badge-loncin">Loncin</span></td>
+    <td>1 цил., 4-тактный, OHC, 4 клапана</td>
+    <td>—</td>
+    <td><span class="badge badge-air">Воздушно-масляное</span></td>
+    <td>249,4 см³</td>
+    <td>24,5 л.с.</td>
+    <td class="notes">Современный 4-клапанный мотор Loncin с балансирным валом и воздушно-масляным охлаждением. Встречается на бюджетных турэндуро и скрэмблерах (Rockot Hound/Scrambler, Forsage Rider). Крутящий момент 23 Нм при 6000 об/мин, 6-ступенчатая КПП.</td>
+    <td class="models-list">Rockot Hound 250, Rockot Scrambler, Forsage Moto Rider 250</td>
+  </tr>
+  <tr data-maker="Zongshen" data-cool="air" data-volume="249.6" data-power="19">
+    <td class="model">172FMM-3A<small>CB250-F</small></td>
+    <td><span class="badge badge-zongshen">Zongshen</span></td>
+    <td>1 цил., вертикальный (OHC)</td>
+    <td>72 мм</td>
+    <td><span class="badge badge-air">Воздушное</span></td>
+    <td>249,6 см³</td>
+    <td>19 л.с.</td>
+    <td class="notes">Более современный воздушный мотор для эндуро. Крутящий момент 18 Нм. Электростартер/кикстартер, 5-ступенчатая КПП.</td>
+    <td class="models-list">Kews, OTOM и другие эндуро</td>
+  </tr>
+  <tr data-maker="Zongshen" data-cool="air" data-volume="250" data-power="21">
+    <td class="model">172FMM-5<small>PR250</small></td>
+    <td><span class="badge badge-zongshen">Zongshen</span></td>
+    <td>1 цил., вертикальный (OHC)</td>
+    <td>72 мм</td>
+    <td><span class="badge badge-air">Воздушное</span></td>
+    <td>~250 см³</td>
+    <td>21 л.с.</td>
+    <td class="notes">20 л.с. на диностенде с колеса.</td>
+    <td class="models-list">Эндуро</td>
+  </tr>
+  <tr data-maker="Zongshen" data-cool="air" data-volume="250" data-power="">
+    <td class="model">172FMM-6<small>CB250-R</small></td>
+    <td><span class="badge badge-zongshen">Zongshen</span></td>
+    <td>1 цил., вертикальный (OHC)</td>
+    <td>72 мм</td>
+    <td><span class="badge badge-air">Воздушное</span></td>
+    <td>~250 см³</td>
+    <td>—</td>
+    <td class="notes">Вариант CB-серии с высокооборотистым характером.</td>
+    <td class="models-list">Эндуро</td>
+  </tr>
+    <tr data-maker="Zongshen" data-cool="liquid" data-volume="279.6" data-power="27">
+    <td class="model">174MN-5<small>NB300</small></td>
+    <td><span class="badge badge-zongshen">Zongshen</span></td>
+    <td>1 цил., 4 клапана, балансирный вал</td>
+    <td>74 мм</td>
+    <td><span class="badge badge-liquid">Жидкостное</span></td>
+    <td>279,6 см³</td>
+    <td>27 л.с.</td>
+    <td class="notes">28 л.с. на диностенде с колеса. Современный 4-клапанный эндуро-мотор Zongshen, топовая версия семейства CBS300. Фактический объём 279,6 см³ (маркетинговое «300»). Балансирный вал, карбюратор NIBBI PWK34, 6-ступенчатая КПП (у PROGASI — 5). Мощность зависит от версии: Kayo K5 — 27 л.с., PROGASI Endurance — 31 л.с., магазинные данные — 25,8 л.с. Крутящий момент 23–24 Нм.</td>
+    <td class="models-list">Kayo K5 300, Kews K27/K28, JHLmoto L5, PROGASI Endurance 300, Progasi Race 300 Wave</td>
+  </tr>
+  <tr data-maker="Zongshen" data-cool="liquid" data-volume="279.5" data-power="25.2">
+    <td class="model">174MN-3<small>CBS300</small></td>
+    <td><span class="badge badge-zongshen">Zongshen</span></td>
+    <td>1 цил., вертикальный</td>
+    <td>74 мм</td>
+    <td><span class="badge badge-liquid">Жидкостное</span></td>
+    <td>279,5 см³</td>
+    <td>~25 л.с.</td>
+    <td class="notes">Нет буквы F/Q в коде — жидкостное охлаждение. По спецификации OTOM — 18,5 кВт (≈25,2 л.с.).</td>
+    <td class="models-list">—</td>
+  </tr>
+    <tr data-maker="Zongshen" data-cool="air" data-volume="300" data-power="">
+    <td class="model">175FMM-3A<small>CB-F300</small></td>
+    <td><span class="badge badge-zongshen">Zongshen</span></td>
+    <td>1 цил., вертикальный (OHC)</td>
+    <td>75 мм</td>
+    <td><span class="badge badge-air">Воздушное</span></td>
+    <td>~300 см³</td>
+    <td>24 л.с.</td>
+    <td class="notes"></td>
+    <td class="models-list">Эндуро</td>
+  </tr>
+    <tr data-maker="Zongshen" data-cool="air" data-volume="271.3" data-power="27">
+    <td class="model">175FMM-5<small>PR300 4V</small></td>
+    <td><span class="badge badge-zongshen">Zongshen</span></td>
+    <td>1 цил., OHC, 4 клапана, балансирный вал</td>
+    <td>72 мм</td>
+    <td><span class="badge badge-air">Воздушное</span></td>
+    <td>271,3 см³</td>
+    <td>~22–28 л.с.</td>
+    <td class="notes">4-клапанный OHC-мотор Zongshen для эндуро и кросса. Фактический объём 271,3 см³ (маркетинговое «300»). Балансирный вал, карбюратор NIBBI PE30, 5 или 6 ступеней в зависимости от версии. Мощность варьируется: Senke ZR PR 300 — 22 л.с., Motoland SMX300 PRO — 25 л.с., Regulmoto Sport-003 — 27 л.с., Moto Apollo M3 300 — 28 л.с.</td>
+    <td class="models-list">Senke ZR PR 300, Motoland SMX300 PRO, Moto Apollo M3 300 4V, Regulmoto Sport-003 PR PRO, JML EN250i (модификация)</td>
+  </tr>
+    <tr data-maker="Zongshen" data-cool="air" data-volume="271.3" data-power="27">
+    <td class="model">175FMN<small>CB300RL</small></td>
+    <td><span class="badge badge-zongshen">Zongshen</span></td>
+    <td>1 цил., OHC, 4 клапана, балансирный вал</td>
+    <td>75 мм</td>
+    <td><span class="badge badge-air">Воздушное</span></td>
+    <td>271,3 см³</td>
+    <td>27 л.с.</td>
+    <td class="notes">24 л.с. на диностенде с колеса. Популярный 4-клапанный эндуро-мотор Zongshen с балансирным валом. Фактический объём 271,3 см³ (маркетинговое «300»). Карбюратор NIBBI PWK34, 6-ступенчатая КПП (у некоторых версий — 5). Мощность варьируется: Gladiator K7 — 25 л.с., Kayo K7-A — 27 л.с., JHL ZR3 / Fidelis King — 28 л.с.</td>
+    <td class="models-list">Gladiator K7, JHL ZR3/GS/LX4, Fidelis King, Kayo K7-A, PITONMOTO MX5, X-MOTOS CBRL300</td>
+  </tr>
+    <tr data-maker="Loncin" data-cool="air" data-volume="285.8" data-power="24">
+    <td class="model">176FMN<small>YB300H</small></td>
+    <td><span class="badge badge-loncin">Loncin</span></td>
+    <td>1 цил., SOHC, 4 клапана</td>
+    <td>76 мм</td>
+    <td><span class="badge badge-air">Воздушное</span></td>
+    <td>285,8 см³</td>
+    <td>~24 л.с. (18 кВт)</td>
+    <td class="notes">Массовый 300-кубовый эндуро-мотор Loncin. SOHC, 4 клапана, балансирный вал, степень сжатия 9:1 (работает на АИ-92). Крутящий момент 23,5 Нм при 6000 об/мин. Ровная тяга с низов. Минусы: регулировка клапанов каждые 6000 км, слабый стоковый воздушный фильтр, расход масла после 15–20 тыс. км. Не путать с YBS300 (LX176MN) — тот DOHC и жидкостный.</td>
+    <td class="models-list">Rockot Warrior/GS2/GS7-PRO/Horizon, XGZ H26L, Zuumav S6, FXmoto K10, KEWS K23, TMBK Magnetic 300 LX, Apollo F4 300</td>
+  </tr>
+    <tr data-maker="Loncin" data-cool="liquid" data-volume="294.9" data-power="28">
+    <td class="model">176MN<small>YBS300</small></td>
+    <td><span class="badge badge-loncin">Loncin</span></td>
+    <td>1 цил., DOHC, 4 клапана</td>
+    <td>76 мм</td>
+    <td><span class="badge badge-liquid">Жидкостное</span></td>
+    <td>294,9 см³</td>
+    <td>28 л.с.</td>
+    <td class="notes">25 л.с. на диностенде с колеса. Современный 4-клапанный DOHC-мотор Loncin для эндуро. Степень сжатия 11:1, балансирный вал, 6-ступенчатая КПП. Хорошая тяга на низах, работает мягче и тише, чем 174-й. Минусы: трудный доступ к свече зажигания, на ранних партиях — нюансы с шестернями стартера. Версия YBS300 PRO (STN G9 PRO) форсирована до 32 л.с. Не путать с 176FMN (YB300H) — тот SOHC и воздушный.</td>
+    <td class="models-list">Zuumav K8R/K9, FXmoto K10, JHLmoto GS YBS300, STN G9 Pro, Nine Fox Prime/Outlaw, Kews YBS 300</td>
+  </tr>
+  <tr data-maker="Zongshen" data-cool="liquid" data-volume="275" data-power="29.5">
+    <td class="model">177MM<small>NC250</small></td>
+    <td><span class="badge badge-zongshen">Zongshen</span></td>
+    <td>1 цил., вертикальный (4V, 1 распредвал)</td>
+    <td>77 мм</td>
+    <td><span class="badge badge-liquid">Жидкостное</span></td>
+    <td>275 см³</td>
+    <td>28–31 л.с.</td>
+    <td class="notes">Спортивная надёжность. Двигатель, проверенный в ралли-рейдах (Дакар). Отличается прочностью и способностью выдерживать высокие нагрузки.</td>
+    <td class="models-list">Zongshen: RX600, RX401. Rockot: GS One Blackout, R8 Avangard, WR300 Obsidian, ZX300 Red Fury.</td>
+  </tr>
+    <tr data-maker="Zongshen" data-cool="liquid" data-volume="249.8" data-power="43.5">
+    <td class="model">178MM-2<small>NX250</small></td>
+    <td><span class="badge badge-zongshen">Zongshen</span></td>
+    <td>1 цил., SOHC, 4 клапана, балансирный вал</td>
+    <td>78 мм</td>
+    <td><span class="badge badge-liquid">Жидкостное</span></td>
+    <td>249,8 см³</td>
+    <td>43,5 л.с.</td>
+    <td class="notes">Высокооборотный эндуро-мотор Zongshen. Степень сжатия 13,4:1 (требует АИ-98), балансирный вал, EFI Bosch. Диаметр × ход 78 × 52,32 мм. Заводская КПП — 5-ступенчатая, у некоторых сборок (Hasky A10 PRO) — 6-ступенчатая. Мощность 43,5 л.с. — это пересчёт 32 кВт (заводская спецификация). Версия GEON Dakar — 41 л.с.</td>
+    <td class="models-list">AJERRA AJ1 NX250, Hasky A10 PRO NX, MINFF M7, 卒玛 A9-NX250, GEON Dakar GNX K23, YKF-X NX250</td>
+  </tr>
+  <tr data-maker="Zongshen" data-cool="liquid" data-volume="300" data-power="35">
+    <td class="model">182MN<small>NC300S</small></td>
+    <td><span class="badge badge-zongshen">Zongshen</span></td>
+    <td>1 цил., вертикальный (4V, 2 распредвала)</td>
+    <td>82 мм</td>
+    <td><span class="badge badge-liquid">Жидкостное</span></td>
+    <td>300 см³</td>
+    <td>35+ л.с.</td>
+    <td class="notes">NC300S является жидкостным. Официальное обозначение — ZS182MN.</td>
+    <td class="models-list">—</td>
+  </tr>
+    <tr data-maker="Xingyue" data-cool="liquid" data-volume="386.8" data-power="29.9">
+    <td class="model">XY191MQ-2<small>Stels 400 / XY400</small></td>
+    <td><span class="badge badge-other">Xingyue</span></td>
+    <td>1 цил., SOHC, 4 клапана</td>
+    <td>91 мм</td>
+    <td><span class="badge badge-liquid">Жидкостное</span></td>
+    <td>386,8 см³</td>
+    <td>~19 л.с. (паспорт) / 29,9 л.с. (реальная)</td>
+    <td class="notes">Мотор Xingyue (Zhejiang XingYue Vehicle), ставился на Stels 400GS/GT/Enduro, Xingyue XY400Y, Gilera SMX 400. Паспортная мощность в РФ — 19 л.с. (14 кВт) при 7000, но реальная заводская — 22 кВт (29,9 л.с.) при 7000 и 30 Нм при 5500. SOHC, 4 клапана, карбюратор, 6-ступенчатая КПП. Слабое место — головка: хилые пружины клапанов, быстрый уход зазоров, риск прогара. Производство в Китае прекращено около 2017 года.</td>
+    <td class="models-list">Stels 400GS, Stels 400GT, Stels 400 Enduro/Supermoto, Xingyue XY400Y/XY400GY, Gilera SMX 400</td>
+  </tr>
+    <tr data-maker="Zongshen" data-cool="liquid" data-volume="449" data-power="38">
+    <td class="model">194MQ<small>NC450</small></td>
+    <td><span class="badge badge-zongshen">Zongshen</span></td>
+    <td>1 цил., вертикальный</td>
+    <td>94 мм</td>
+    <td><span class="badge badge-liquid">Жидкостное</span></td>
+    <td>449 см³</td>
+    <td>38–48 л.с.</td>
+    <td class="notes">Скопирован с двигателя мотоцикла Honda CRF450.</td>
+    <td class="models-list">Rockot ZX450 Supreme.</td>
+  </tr>
+    <tr data-maker="Lifan" data-cool="air" data-volume="249" data-power="17.7">
+    <td class="model">2V49FMM<small>V16 / LF250</small></td>
+    <td><span class="badge badge-lifan">Lifan</span></td>
+    <td>V-образный твин, 4-тактный</td>
+    <td>49 мм</td>
+    <td><span class="badge badge-air">Воздушное</span></td>
+    <td>249 см³</td>
+    <td>13 кВт (≈17,7 л.с.)</td>
+    <td class="notes">V-образный твин воздушного охлаждения, копия архитектуры Yamaha Virago 250. Степень сжатия 10:1, 5-ступенчатая КПП. Низкий центр тяжести, тяговитый характер. Мощность варьируется по моделям: V16 (сток) — 13 кВт, V16 国四 — 14 кВт, Longjia V-Cafe — 12,5 кВт.</td>
+    <td class="models-list">Lifan V16 (LF250-D/E), Lifan LF250-B, Longjia V-Cafe 250, Jinlun Spartan 250</td>
+  </tr>
+    <tr data-maker="Zongshen" data-cool="liquid" data-volume="250" data-power="17">
+    <td class="model">255FMM<small>TM250</small></td>
+    <td><span class="badge badge-zongshen">Zongshen</span></td>
+    <td>Параллельный твин, OHC, балансирный вал</td>
+    <td>55 мм</td>
+    <td><span class="badge badge-liquid">Жидкостное</span></td>
+    <td>250 см³</td>
+    <td>12,5 кВт (≈17 л.с.)</td>
+    <td class="notes">Параллельный твин с балансирным валом, синхронным ходом поршней и жидкостным охлаждением. 6-ступенчатая КПП, электростартер, степень сжатия 9.3:1. Встречается на лёгких дорожных и спортивных моделях.</td>
+    <td class="models-list">—</td>
+  </tr>
+    <tr data-maker="QJMOTOR" data-cool="liquid" data-volume="296" data-power="30.7">
+    <td class="model">QJ2V58MN-A<small>SRV 300</small></td>
+    <td><span class="badge badge-other">QJMOTOR</span></td>
+    <td>V-образный твин, SOHC, 8 клапанов</td>
+    <td>58 мм</td>
+    <td><span class="badge badge-liquid">Жидкостное</span></td>
+    <td>296 см³</td>
+    <td>30,7 л.с.</td>
+    <td class="notes">V-образный твин жидкостного охлаждения, редкость в классе 300 см³. Степень сжатия 11.8:1, крутящий момент 26 Нм при 5000 об/мин. EFI, 6-ступенчатая КПП. Ставится на QJMOTOR SRV 300, Flash 300S, SFT 300.</td>
+    <td class="models-list">QJMOTOR SRV 300, Flash 300S, SFT 300</td>
+  </tr>
+    <tr data-maker="Loncin" data-cool="liquid" data-volume="322" data-power="40">
+    <td class="model">KE350<small>LX268MN</small></td>
+    <td><span class="badge badge-loncin">Loncin</span></td>
+    <td>Параллельный твин, DOHC, 8 клапанов</td>
+    <td>68 мм</td>
+    <td><span class="badge badge-liquid">Жидкостное</span></td>
+    <td>322 см³</td>
+    <td>29,5 кВт (≈40 л.с.)</td>
+    <td class="notes">Параллельный твин, обратная разработка Yamaha R3. DOHC, 8 клапанов, степень сжатия 11.2:1. Высокооборотный мотор с хорошим потенциалом для лёгких спортбайков. Ставится на Voge 350AC, Kove 321R/321RR.</td>
+    <td class="models-list">Voge 350AC, Kove 321R, Kove 321RR</td>
+  </tr>
+    <tr data-maker="Zongshen" data-cool="liquid" data-volume="378.8" data-power="37">
+    <td class="model">266MQ-P<small>TC380</small></td>
+    <td><span class="badge badge-zongshen">Zongshen</span></td>
+    <td>Параллельный твин, SOHC, 8 клапанов</td>
+    <td>66 мм</td>
+    <td><span class="badge badge-liquid">Жидкостное</span></td>
+    <td>378,8 см³</td>
+    <td>27 кВт (≈37 л.с.)</td>
+    <td class="notes">Параллельный твин с балансирным валом и жидкостным охлаждением. 8 клапанов (по 4 на цилиндр), SOHC, степень сжатия 10.5:1. Хорошая тяга на низах, 6-ступенчатая КПП. Версия TC380R форсирована до 30 кВт. Ставится на Cyclone RX3S, RE3, RZ3S, Sinnis Terrain 380, Lexmoto LXR 380.</td>
+    <td class="models-list">Cyclone RX3S, Cyclone RE3, Cyclone RZ3S, Sinnis Terrain 380, Lexmoto LXR 380</td>
+  </tr>
+    <tr data-maker="CFMoto" data-cool="liquid" data-volume="449.5" data-power="51.7">
+    <td class="model">272MQ<small>450 Twin</small></td>
+    <td><span class="badge badge-other">CFMoto</span></td>
+    <td>Параллельный твин, DOHC, 8 клапанов</td>
+    <td>72 мм</td>
+    <td><span class="badge badge-liquid">Жидкостное</span></td>
+    <td>449,5 см³</td>
+    <td>38 кВт (≈51,7 л.с.)</td>
+    <td class="notes">Параллельный твин с 270° коленвалом, имитирующим характер V-twin. Степень сжатия 11.5:1. Мощность зависит от модели: 450SR — 51,7 л.с., 450MT — 42 л.с., 450CL-C — 40 л.с. Два балансирных вала, Bosch EFI.</td>
+    <td class="models-list">CFMoto 450SR, 450SR S, 450MT, 450NK, 450CL-C</td>
+  </tr>
+    <tr data-maker="Loncin" data-cool="liquid" data-volume="471" data-power="47">
+    <td class="model">KE500<small>LX267MR</small></td>
+    <td><span class="badge badge-loncin">Loncin</span></td>
+    <td>Параллельный твин, DOHC, 8 клапанов</td>
+    <td>67 мм</td>
+    <td><span class="badge badge-liquid">Жидкостное</span></td>
+    <td>471 см³</td>
+    <td>35–36 кВт (≈47–49 л.с.)</td>
+    <td class="notes">Копия Honda CB500. Официальный код Loncin — LX267MR. Степень сжатия 10,7:1, крутящий момент 43–45 Нм при 7000 об/мин. Один из самых распространённых среднекубатурных моторов в Китае. Ставится на Voge 500DS/500R/500AC, Colove 500X, Brixton Crossfire 500.</td>
+    <td class="models-list">Voge 500DS/500R/500AC, Colove 500X, Brixton Crossfire 500</td>
+  </tr>
+    <tr data-maker="Loncin" data-cool="liquid" data-volume="494" data-power="53.8">
+    <td class="model">KEL525<small>LX268MR</small></td>
+    <td><span class="badge badge-loncin">Loncin</span></td>
+    <td>Параллельный твин, DOHC, 8 клапанов</td>
+    <td>68 мм</td>
+    <td><span class="badge badge-liquid">Жидкостное</span></td>
+    <td>494 см³</td>
+    <td>39,6 кВт (≈53,8 л.с.)</td>
+    <td class="notes">Оптимизированный преемник KE500. Квадратные размеры 68×68 мм (против 67×66,8), степень сжатия 11.5:1 (против 10.7:1). Крутящий момент 50,5 Нм при 7000 об/мин. В Европе доступен в A2-версии на 35 кВт (47,6 л.с.).</td>
+    <td class="models-list">Voge 525R, 525AC, 525DS, 525DSX, 525ACX, CU525, Excelle 525X</td>
+  </tr>
+  <tr data-maker="Zongshen" data-cool="liquid" data-volume="548.8" data-power="57">
+    <td class="model">272MS-2<small>ZS550SR</small></td>
+    <td><span class="badge badge-zongshen">Zongshen</span></td>
+    <td>Рядный 2-цил., DOHC, 8 клапанов</td>
+    <td>72 мм</td>
+    <td><span class="badge badge-liquid">Жидкостное</span></td>
+    <td>548,8 см³</td>
+    <td>57 л.с.</td>
+    <td class="notes">Среднекубатурный двухцилиндровый мотор Zongshen. Высокая степень сжатия (11.5:1), балансирный вал, привод газораспределения цепью DID. Встречается на Cyclone RX600 в версиях с разной форсировкой.</td>
+    <td class="models-list">Cyclone RX600</td>
+  </tr>
+    <tr data-maker="QJMOTOR" data-cool="liquid" data-volume="554" data-power="56.1">
+    <td class="model">QJ270MS-C<small>SRK 550</small></td>
+    <td><span class="badge badge-other">QJMOTOR</span></td>
+    <td>Параллельный твин, DOHC, 8 клапанов</td>
+    <td>70,5 мм</td>
+    <td><span class="badge badge-liquid">Жидкостное</span></td>
+    <td>554 см³</td>
+    <td>41,2 кВт (≈56,1 л.с.)</td>
+    <td class="notes">Параллельный твин с 270° коленвалом. Степень сжатия 11,5:1. Крутящий момент 54 Нм при 5500 об/мин. EFI, 6-ступенчатая КПП, сцепление с проскальзыванием. Версия A2 — 35 кВт (47,6 л.с.). Ставится на SRK 550, SRK 550 RS, SRT 600 S/SX, SRK 600 RS.</td>
+    <td class="models-list">QJMOTOR SRK 550, SRK 550 RS, SRT 600 S, SRT 600 SX, SRK 600 RS</td>
+  </tr>
+    <tr data-maker="QJMOTOR" data-cool="liquid" data-volume="600" data-power="81.6">
+    <td class="model">SRK 600<small>600 Inline-Four</small></td>
+    <td><span class="badge badge-other">QJMOTOR</span></td>
+    <td>Рядная 4-цил., DOHC, 16 клапанов</td>
+    <td>65 мм</td>
+    <td><span class="badge badge-liquid">Жидкостное</span></td>
+    <td>600 см³</td>
+    <td>60 кВт (≈81,6 л.с.)</td>
+    <td class="notes">Рядная четвёрка, развитие двигателя Benelli TNT 600i (QJMOTOR — материнская компания Benelli). Степень сжатия 11.5:1, крутящий момент 51 Нм при 10500 об/мин. Версия для внутреннего рынка Китая (赛600) — 65 кВт / 56 Нм. Не путать с SRK 600 для некоторых рынков (Турция, Франция) — там под этим именем продаётся 554-кубовый параллельный твин.</td>
+    <td class="models-list">QJMOTOR SRK 600 RC/RR, 赛600, Benelli TNT 600i</td>
+  </tr>
+    <tr data-maker="Zongshen" data-cool="liquid" data-volume="649.56" data-power="70">
+    <td class="model">282MT<small>ZS650</small></td>
+    <td><span class="badge badge-zongshen">Zongshen</span></td>
+    <td>Рядный 2-цил., DOHC, 8 клапанов</td>
+    <td>82 мм</td>
+    <td><span class="badge badge-liquid">Жидкостное</span></td>
+    <td>649,56 см³</td>
+    <td>70 л.с.</td>
+    <td class="notes">Флагманский двухцилиндровый мотор Zongshen, созданный на базе разработки Norton. Степень сжатия 11.45:1. Форсировка снижена (70 л.с. против 84+ у Norton) ради надёжности и ресурса.</td>
+    <td class="models-list">—</td>
+  </tr>
+    <tr data-maker="CFMoto" data-cool="liquid" data-volume="649.3" data-power="61">
+    <td class="model">283MT<small>CF650-8F</small></td>
+    <td><span class="badge badge-other">CFMoto</span></td>
+    <td>Параллельный твин, DOHC, 8 клапанов</td>
+    <td>83 мм</td>
+    <td><span class="badge badge-liquid">Жидкостное</span></td>
+    <td>649,3 см³</td>
+    <td>45 кВт (≈61 л.с.)</td>
+    <td class="notes">Самый массовый среднекубатурный мотор CFMoto, созданный на базе архитектуры Kawasaki 650. Степень сжатия 11,3:1, диаметр × ход 83 × 60 мм. Мощность зависит от модели: 650NK — 61 л.с., 650MT — 71 л.с., 650GT — 62,5 л.с., Moto Morini — 60 л.с. Также поставляется другим брендам (Moto Morini).</td>
+    <td class="models-list">CFMoto 650NK, 650MT, 650GT, 650TR, Moto Morini Seiemmezzo, X-Cape 650</td>
+  </tr>
+    <tr data-maker="CFMoto" data-cool="liquid" data-volume="693" data-power="74">
+    <td class="model">283MU<small>700CLX</small></td>
+    <td><span class="badge badge-other">CFMoto</span></td>
+    <td>Параллельный твин, DOHC, 8 клапанов</td>
+    <td>83 мм</td>
+    <td><span class="badge badge-liquid">Жидкостное</span></td>
+    <td>693 см³</td>
+    <td>55 кВт (≈74 л.с.)</td>
+    <td class="notes">Увеличенная версия архитектуры Kawasaki 650 (как и 283MT). Степень сжатия 11.6:1. Мощность зависит от модели: 700CL-X Heritage — 74 л.с., 700CL-X Adventure — 69 л.с., 700MT — 67 л.с. Тот же мотор ставится на Benelli TRK702 (75 л.с.) и QJMOTOR 700 (56 кВт).</td>
+    <td class="models-list">CFMoto 700CL-X Heritage, 700CL-X Adventure, 700MT, Benelli TRK702, QJMOTOR 闪700</td>
+  </tr>
+  <tr data-maker="Zongshen" data-cool="liquid" data-volume="699" data-power="97.2">
+    <td class="model">ZT370MU (F/T)<small>Zontes 703 F/T</small></td>
+    <td><span class="badge badge-zongshen">Zontes / Zongshen</span></td>
+    <td>Рядный 3-цил., DOHC, 12 клапанов</td>
+    <td>70 мм</td>
+    <td><span class="badge badge-liquid">Жидкостное</span></td>
+    <td>699 см³</td>
+    <td>71,5 кВт (≈97,2 л.с.)</td>
+    <td class="notes">Туристическая настройка трёхцилиндрового ZT370MU. Максимальный крутящий момент 76 Н·м при 7500 об/мин — тяга смещена вниз для турэндуро. Степень сжатия 13:1. Ставится на 703 F и 703 F Tour.</td>
+    <td class="models-list">Zontes 703 F, 703 F Tour</td>
+  </tr>
+  <tr data-maker="Zongshen" data-cool="liquid" data-volume="699" data-power="102">
+    <td class="model">ZT370MU (R/RR)<small>Zontes 703 R/RR</small></td>
+    <td><span class="badge badge-zongshen">Zontes / Zongshen</span></td>
+    <td>Рядный 3-цил., DOHC, 12 клапанов</td>
+    <td>70 мм</td>
+    <td><span class="badge badge-liquid">Жидкостное</span></td>
+    <td>699 см³</td>
+    <td>75 кВт (≈102 л.с.)</td>
+    <td class="notes">Спортивная настройка ZT370MU. Максимальная мощность 75 кВт при 11 200 об/мин, крутящий момент 74,5 Н·м при 8500 об/мин. Степень сжатия 13:1, квикшифтер. Ставится на 703 R и 703 RR.</td>
+    <td class="models-list">Zontes 703 R, 703 RR</td>
+  </tr>
+    <tr data-maker="CFMoto" data-cool="liquid" data-volume="799" data-power="95">
+    <td class="model">288MW<small>800MT</small></td>
+    <td><span class="badge badge-other">CFMoto</span></td>
+    <td>Параллельный твин, DOHC, 8 клапанов</td>
+    <td>88 мм</td>
+    <td><span class="badge badge-liquid">Жидкостное</span></td>
+    <td>799 см³</td>
+    <td>70 кВт (≈95 л.с.)</td>
+    <td class="notes">Производится по лицензии KTM LC8c. Диаметр × ход 88 × 65,7 мм. Два балансирных вала, Bosch EFI. Крутящий момент 87 Нм при 6750 об/мин (800MT-X). В версии 800MT-X степень сжатия 12.8:1 и 91,2 л.с.</td>
+    <td class="models-list">CFMoto 800MT, 800MT-X, 800NK</td>
+  </tr>
+</tbody>
+    </table>
+  </div>
+  <div class="no-results" id="no-results">Ничего не найдено. Попробуйте изменить фильтры.</div>
+
+  <footer>
+    Справочник составлен на основе открытых источников. Данные могут требовать уточнения по конкретным моделям.<br>
+    <a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">↑ Наверх</a>
+  </footer>
+</div>
+
+<script>
+(function () {
+  const tbody = document.getElementById("tbody");
+  const rows = Array.from(tbody.querySelectorAll("tr"));
+
+  rows.forEach(tr => {
+    tr.dataset.model = tr.querySelector(".model").firstChild.textContent.trim().toLowerCase();
+    tr.dataset.sub   = tr.querySelector(".model small").textContent.trim().toLowerCase();
+    tr.dataset.makerLabel = tr.querySelectorAll("td")[1].textContent.trim().toLowerCase();
+  });
+
+  const searchEl = document.getElementById("search");
+  const makerEl  = document.getElementById("filter-maker");
+  const coolingEl= document.getElementById("filter-cooling");
+  const volumeEl = document.getElementById("filter-volume");
+  const statsEl  = document.getElementById("stats");
+  const noResEl  = document.getElementById("no-results");
+
+  let sortKey = null, sortDir = 1;
+
+  function applyFilters() {
+    const q       = searchEl.value.toLowerCase().trim();
+    const maker   = makerEl.value;
+    const cooling = coolingEl.value;
+    const volRange= volumeEl.value;
+
+    let visible = 0;
+
+    rows.forEach(tr => {
+      const d = tr.dataset;
+      let ok = true;
+      if (q && !(d.model.includes(q) || d.sub.includes(q) || d.makerLabel.includes(q))) ok = false;
+      if (ok && maker && d.maker !== maker) ok = false;
+      if (ok && cooling && d.cool !== cooling) ok = false;
+      if (ok && volRange) {
+        const [min, max] = volRange.split("-").map(Number);
+        const v = parseFloat(d.volume);
+        if (v < min || v > max) ok = false;
+      }
+      tr.style.display = ok ? "" : "none";
+      if (ok) visible++;
+    });
+
+    statsEl.innerHTML = `Показано: <span>${visible}</span> из <span>${rows.length}</span> двигателей`;
+    noResEl.style.display = visible === 0 ? "block" : "none";
+  }
+
+  function applySort() {
+    if (!sortKey) return;
+    const sorted = [...rows].sort((a, b) => {
+      let va, vb;
+      if (sortKey === "model")  { va = a.dataset.model;  vb = b.dataset.model;  }
+      if (sortKey === "volume") { va = parseFloat(a.dataset.volume); vb = parseFloat(b.dataset.volume); }
+      if (sortKey === "power")  {
+        const pa = a.dataset.power === "" ? Infinity : parseFloat(a.dataset.power);
+        const pb = b.dataset.power === "" ? Infinity : parseFloat(b.dataset.power);
+        va = pa; vb = pb;
+      }
+      if (va < vb) return -1 * sortDir;
+      if (va > vb) return 1 * sortDir;
+      return 0;
+    });
+    sorted.forEach(tr => tbody.appendChild(tr));
+  }
+
+  function render() { applySort(); applyFilters(); }
+
+  [searchEl, makerEl, coolingEl, volumeEl].forEach(el => {
+    el.addEventListener("input", render);
+    el.addEventListener("change", render);
+  });
+
+  document.querySelectorAll("th.sortable").forEach(th => {
+    th.addEventListener("click", () => {
+      const key = th.dataset.sort;
+      if (sortKey === key) { sortDir *= -1; }
+      else { sortKey = key; sortDir = 1; }
+      document.querySelectorAll("th.sortable").forEach(t => t.classList.remove("active"));
+      th.classList.add("active");
+      render();
+    });
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>
