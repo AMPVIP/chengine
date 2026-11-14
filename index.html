@@ -85,6 +85,64 @@
     font-size: 0.85rem;
     margin-bottom: 12px;
   }
+    .legend {
+    margin-bottom: 20px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--card);
+    overflow: hidden;
+  }
+  .legend summary {
+    padding: 14px 18px;
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--accent);
+    font-size: 0.95rem;
+    user-select: none;
+    list-style: none;
+  }
+  .legend summary::-webkit-details-marker { display: none; }
+  .legend summary::before {
+    content: "▸ ";
+    display: inline-block;
+    transition: transform 0.2s;
+  }
+  .legend[open] summary::before { content: "▾ "; }
+  .legend-body {
+    padding: 0 18px 18px;
+    font-size: 0.85rem;
+    color: var(--text);
+  }
+  .legend-body p { margin-bottom: 10px; }
+  .legend-body code {
+    background: #141a20;
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    color: var(--accent);
+  }
+  .legend-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 10px 0 14px;
+    font-size: 0.8rem;
+  }
+  .legend-table th,
+  .legend-table td {
+    padding: 8px 10px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+    text-align: left;
+  }
+  .legend-table th {
+    color: var(--text-dim);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .legend-table td:first-child { white-space: nowrap; }
+  .legend-example { color: var(--text-dim); }
+  .legend-note { color: var(--text-dim); font-size: 0.8rem; }
   .stats span { color: var(--accent); font-weight: 600; }
   .table-wrap {
     overflow-x: auto;
@@ -198,7 +256,67 @@
     <h1>Китайские мотоциклетные двигатели</h1>
     <p>Справочник по маркировке, характеристикам и репутации моторов Zongshen, Lifan, Loncin, Yinxiang и GY6</p>
   </header>
-
+  <details class="legend">
+    <summary>📖 Как читать маркировку китайских двигателей</summary>
+    <div class="legend-body">
+      <p>Код двигателя — это не случайный набор букв, а стандартная шифровка. Пример: <code>172FMM</code>.</p>
+      <table class="legend-table">
+        <tr>
+          <th>Позиция</th>
+          <th>Что означает</th>
+          <th>Пример</th>
+        </tr>
+        <tr>
+          <td><b>1-я цифра</b></td>
+          <td>Число цилиндров</td>
+          <td><code>1</code> = один, <code>2</code> = два</td>
+        </tr>
+        <tr>
+          <td><b>Буква после цифры</b></td>
+          <td>Расположение цилиндра</td>
+          <td><code>P</code> = горизонтальное, <code>V</code> = V-образное, нет буквы = вертикальное/параллельное</td>
+        </tr>
+        <tr>
+          <td><b>2-я и 3-я цифры</b></td>
+          <td>Диаметр цилиндра, мм (округлён в большую сторону)</td>
+          <td><code>72</code> = 72 мм</td>
+        </tr>
+        <tr>
+          <td><b>Буква охлаждения</b></td>
+          <td>Тип охлаждения</td>
+          <td><code>F</code> = воздушное (набегающий поток), <code>Q</code> = принудительное воздушное, <b>нет буквы</b> = жидкостное</td>
+        </tr>
+        <tr>
+          <td><b>M</b></td>
+          <td>Всегда присутствует — мотоциклетный тип</td>
+          <td><code>M</code></td>
+        </tr>
+        <tr>
+          <td><b>Последняя буква</b></td>
+          <td>Класс рабочего объёма</td>
+          <td>
+            <code>A</code> &lt;50 · <code>B</code> 50 · <code>C</code> 60 · <code>D</code> 70 · <code>E</code> 80 · <code>F</code> 90 · <code>G</code> 100 · <code>H</code> 110 · <code>I</code> 125 · <code>J</code> 150 · <code>K</code> 175 · <code>L</code> 200 · <code>M</code> 250 · <code>N</code> 300 · <code>P</code> 350 · <code>Q</code> 400 · <code>R</code> 500 · <code>S</code> 600 · <code>T</code> 650 · <code>U</code> 700 · <code>V</code> 750 · <code>W</code> 800 · <code>X</code> 900 · <code>Y</code> 1000 · <code>Z</code> 1200
+          </td>
+        </tr>
+      </table>
+            <p><b>Префикс (завод-изготовитель)</b> — указывается не всегда:</p>
+      <table class="legend-table">
+        <tr>
+          <th>Префикс</th>
+          <th>Производитель</th>
+        </tr>
+        <tr><td><code>ZS</code></td><td>Zongshen</td></tr>
+        <tr><td><code>LF</code></td><td>Lifan</td></tr>
+        <tr><td><code>LC</code></td><td>Loncin</td></tr>
+        <tr><td><code>YB</code></td><td>Yiben</td></tr>
+        <tr><td><code>K</code></td><td>Qingqi / Baltmotors (K172FMM)</td></tr>
+        <tr><td><code>QJ</code></td><td>QJMOTOR</td></tr>
+        <tr><td><code>YX</code></td><td>Yinxiang</td></tr>
+      </table>
+      <p class="legend-example"><b>Пример:</b> <code>172FMM</code> = 1 цилиндр, вертикальный, диаметр 72 мм, воздушное охлаждение, мотоциклетный, класс 250 см³.</p>
+      <p class="legend-note">⚠️ Код не всегда однозначен. Префикс завода может отсутствовать или совпадать у разных производителей: под 
+      <code>172FMM</code> скрываются GN250, CB250-F и PR250, а <code>ZS172FMM-3A</code> и <code>K172FMM</code> — разные моторы с одинаковыми цифрами. Уточняйте по конкретной модели мотоцикла.</p></div>
+  </details>
   <div class="controls">
     <input type="text" id="search" placeholder="🔍 Поиск по модели или производителю...">
     <select id="filter-maker">
@@ -299,6 +417,17 @@
     <td class="notes">Верхневальный CB125. Крутится выше CG125 (9500–10000 об/мин), но требует более частой регулировки клапанов. Встречается на дорожниках и лёгких эндуро.</td>
     <td class="models-list">Дорожники 125cc</td>
   </tr>
+    <tr data-maker="Zongshen" data-cool="air" data-volume="149.3" data-power="13.3">
+    <td class="model">157FMJ<small>CBF150</small></td>
+    <td><span class="badge badge-zongshen">Zongshen / Yingang</span></td>
+    <td>1 цил., OHC, 2 клапана</td>
+    <td>57,3 мм</td>
+    <td><span class="badge badge-air">Воздушное</span></td>
+    <td>149,3 см³</td>
+    <td>13,3 л.с. при 7500</td>
+    <td class="notes">Клон Honda CBF150. На 2 кг легче CG и CB аналогичной кубатуры, уравновешивающий вал. Встречается на Patron (производство Yingang).</td>
+    <td class="models-list">Patron, Yingang</td>
+  </tr>
   <tr data-maker="GY6" data-cool="air" data-volume="148.5" data-power="10">
     <td class="model">157QMJ<small>GY6 150</small></td>
     <td><span class="badge badge-gy6">Различные (GY6)</span></td>
@@ -361,7 +490,7 @@
     <td>63 мм</td>
     <td><span class="badge badge-air">Воздушное</span></td>
     <td>193,2 см³</td>
-    <td>~13,5–15 л.с.</td>
+    <td>10,9–11,9 л.с.</td>
     <td class="notes">Мощный «воздушник» для эндуро. Копия Honda CG200. Хорошая тяга на низах, прост в ремонте. Слабое место — вибрации и качество сборки у дешёвых моделей.</td>
     <td class="models-list">Lifan LF200GY, китайские эндуро 200cc</td>
   </tr>
@@ -463,6 +592,17 @@
     <td>24,5 л.с.</td>
     <td class="notes">Современный 4-клапанный мотор Loncin с балансирным валом и воздушно-масляным охлаждением. Встречается на бюджетных турэндуро и скрэмблерах (Rockot Hound/Scrambler, Forsage Rider). Крутящий момент 23 Нм при 6000 об/мин, 6-ступенчатая КПП.</td>
     <td class="models-list">Rockot Hound 250, Rockot Scrambler, Forsage Moto Rider 250</td>
+  </tr>  
+    <tr data-maker="Zongshen" data-cool="air" data-volume="249.1" data-power="19.5">
+    <td class="model">172FMM<small>GN250 / K172FMM</small></td>
+    <td><span class="badge badge-zongshen">Qingqi / Baltmotors</span></td>
+    <td>1 цил., SOHC, 4 клапана, балансирный вал</td>
+    <td>72 мм</td>
+    <td><span class="badge badge-air">Воздушное</span></td>
+    <td>249,1 см³</td>
+    <td>19–20 л.с. при 8500</td>
+    <td class="notes">Клон Suzuki GN250. Большой картер, 4-клапанная головка SOHC, балансирный вал, сменный бумажный масляный фильтр. 5-ступенчатая КПП. Встречается на круизерах, дорожниках и ранних турэндуро (Baltmotors Enduro 250).</td>
+    <td class="models-list">Baltmotors Enduro 250, Zongshen Vinner 250, Kinlon</td>
   </tr>
   <tr data-maker="Zongshen" data-cool="air" data-volume="249.6" data-power="19">
     <td class="model">172FMM-3A<small>CB250-F</small></td>
@@ -486,16 +626,16 @@
     <td class="notes">20 л.с. на диностенде с колеса.</td>
     <td class="models-list">Эндуро</td>
   </tr>
-  <tr data-maker="Zongshen" data-cool="air" data-volume="250" data-power="">
-    <td class="model">172FMM-6<small>CB250-R</small></td>
+    <tr data-maker="Zongshen" data-cool="air" data-volume="249.4" data-power="22">
+    <td class="model">172FMM-6A<small>CB250 4V</small></td>
     <td><span class="badge badge-zongshen">Zongshen</span></td>
-    <td>1 цил., вертикальный (OHC)</td>
+    <td>1 цил., SOHC, 4 клапана</td>
     <td>72 мм</td>
     <td><span class="badge badge-air">Воздушное</span></td>
-    <td>~250 см³</td>
-    <td>—</td>
-    <td class="notes">Вариант CB-серии с высокооборотистым характером.</td>
-    <td class="models-list">Эндуро</td>
+    <td>249,4 см³</td>
+    <td>~22 л.с. (performance)</td>
+    <td class="notes">Форсированная версия CB250-F с 4-клапанной головкой для лучшей тяги на верхах. Встречается на тюнинговых эндуро и питбайках.</td>
+    <td class="models-list">Тюнинговые эндуро (Kayo, BSE, Avantis)</td>
   </tr>
     <tr data-maker="Zongshen" data-cool="liquid" data-volume="279.6" data-power="27">
     <td class="model">174MN-5<small>NB300</small></td>
@@ -628,6 +768,28 @@
     <td>38–48 л.с.</td>
     <td class="notes">Скопирован с двигателя мотоцикла Honda CRF450.</td>
     <td class="models-list">Rockot ZX450 Supreme.</td>
+  </tr>
+    <tr data-maker="Loncin" data-cool="air" data-volume="124.7" data-power="12">
+    <td class="model">244FMI<small>CB125T Twin</small></td>
+    <td><span class="badge badge-loncin">Loncin / Zongshen</span></td>
+    <td>Параллельный твин, SOHC, 4 клапана (2 на цил.)</td>
+    <td>44 мм</td>
+    <td><span class="badge badge-air">Воздушное</span></td>
+    <td>124,7 см³</td>
+    <td>8,0–8,8 кВт (≈11–12 л.с.)</td>
+    <td class="notes">Копия Honda CB125T (параллельный твин). SOHC, 2 клапана на цилиндр, карбюратор. Мощность варьируется: Zongshen ZS244FMI — 8,0 кВт, Tianma — 8,4 кВт, Loncin LX244FMI — 8,8 кВт. 5-ступенчатая КПП, CDI, электростартер/кикстартер. Массовый мотор для 125-кубовых круизеров Jinlun, Regal Raptor, Lexmoto. Жидкостная версия обозначается 244MI (без F).</td>
+    <td class="models-list">Jinlun JL125-11, Regal Raptor Daytona/Spyder/Bobber 125, Lexmoto, Sinnis, Keeway 125 cruisers</td>
+  </tr>
+    <tr data-maker="Loncin" data-cool="liquid" data-volume="124" data-power="9">
+    <td class="model">244MI<small>CB125T Twin</small></td>
+    <td><span class="badge badge-loncin">Loncin / Различные</span></td>
+    <td>Параллельный твин, SOHC, 4 клапана</td>
+    <td>44 мм</td>
+    <td><span class="badge badge-liquid">Жидкостное</span></td>
+    <td>~124 см³</td>
+    <td>8–10 л.с.</td>
+    <td class="notes">Двухцилиндровый клон Honda CB125T с жидкостным охлаждением (в отличие от воздушного 244FMI). Отличается прекрасной балансировкой на высоких оборотах (8500–10000 об/мин), но дорог для своей мощности. Встречается на чопперах Regal Raptor, Jonway, Johnny Pag.</td>
+    <td class="models-list">Regal Raptor Daytona/EOS/Spyder 125, Jonway, Johnny Pag</td>
   </tr>
     <tr data-maker="Lifan" data-cool="air" data-volume="249" data-power="17.7">
     <td class="model">2V49FMM<small>V16 / LF250</small></td>
