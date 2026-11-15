@@ -85,7 +85,7 @@
     font-size: 0.85rem;
     margin-bottom: 12px;
   }
-    .legend {
+  .legend {
     margin-bottom: 20px;
     border: 1px solid var(--border);
     border-radius: 12px;
@@ -112,6 +112,8 @@
     padding: 0 18px 18px;
     font-size: 0.85rem;
     color: var(--text);
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
   }
   .legend-body p { margin-bottom: 10px; }
   .legend-body code {
@@ -126,6 +128,7 @@
     border-collapse: collapse;
     margin: 10px 0 14px;
     font-size: 0.8rem;
+    min-width: 520px;
   }
   .legend-table th,
   .legend-table td {
@@ -143,27 +146,6 @@
   .legend-table td:first-child { white-space: nowrap; }
   .legend-example { color: var(--text-dim); }
   .legend-note { color: var(--text-dim); font-size: 0.8rem; }
-.legend {
-  margin-bottom: 20px;
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  background: var(--card);
-  overflow: hidden;        /* было — оставить для скругления */
-}
-.legend-body {
-  padding: 0 18px 18px;
-  font-size: 0.85rem;
-  color: var(--text);
-  overflow-x: auto;        /* ← добавить: горизонтальный скролл */
-  -webkit-overflow-scrolling: touch; /* ← плавный скролл на iOS */
-}
-.legend-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 10px 0 14px;
-  font-size: 0.8rem;
-  min-width: 520px;        /* ← добавить: чтобы таблица не сжималась в кашу */
-}
   .stats span { color: var(--accent); font-weight: 600; }
   .table-wrap {
     overflow-x: auto;
